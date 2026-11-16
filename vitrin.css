@@ -1,0 +1,36 @@
+/* perArt — Projeler vitrini (12 sütunlu kart ızgarası; her kartta fonsuz maket, altında künye) */
+.vitrin { display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(14px, 1.6vw, 22px); }
+.vk { grid-column: span 7; display: flex; flex-direction: column; border-radius: 12px; overflow: hidden; background: #111316; color: #ECEAE5; box-shadow: 0 0 0 1px rgba(255, 255, 255, .06), 0 34px 70px -48px rgba(0, 0, 0, .8); }
+.vk:nth-child(odd) { grid-column: span 5; }   /* dikey maketler (bina, oda) dar, yatay olanlar (arazi, market) geniş */
+.vk-sahne {
+  position: relative; display: block; width: 100%; height: clamp(300px, 31vw, 470px); padding: 0; border: 0; cursor: zoom-in; overflow: hidden;
+  background:
+    radial-gradient(60% 18% at 50% 88%, rgba(0, 0, 0, .55), transparent 70%),
+    radial-gradient(80% 75% at 50% 42%, #2d3238 0, #181b1f 62%, #111316 100%);
+}
+.vk-sahne img {
+  position: absolute; left: 7%; top: 7%; width: 86%; height: 80%; object-fit: contain;
+  filter: drop-shadow(0 24px 26px rgba(0, 0, 0, .55)); transition: transform .9s var(--ease);
+}
+.vk-sahne:hover img, .vk-sahne:focus-visible img { transform: translateY(-6px) scale(1.035); }
+.vk-sahne:focus-visible { outline: 2px solid #FF6A3D; outline-offset: -2px; }
+.vk-ac {
+  position: absolute; right: 14px; top: 14px; display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 650; color: #121417; background: rgba(250, 249, 246, .94); padding: 8px 12px; border-radius: 6px;
+  opacity: 0; transform: translateY(-4px); transition: opacity .3s, transform .3s var(--ease);
+}
+.vk-ac span { font-size: 15px; }
+.vk-sahne:hover .vk-ac, .vk-sahne:focus-visible .vk-ac { opacity: 1; transform: none; }
+.vk-metin { display: flex; flex-direction: column; gap: 10px; padding: 22px clamp(20px, 2vw, 28px) 26px; border-top: 1px solid rgba(255, 255, 255, .07); flex: 1; }
+.vk-ust { display: flex; align-items: center; gap: 10px; margin: 0; font-family: var(--mono); font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; color: #9A9EA6; }
+.vk-ust span { color: #FF6A3D; border: 1px solid rgba(255, 106, 61, .6); padding: 2px 6px; border-radius: 3px; letter-spacing: 0; }
+.vk h3 { margin: 0; font-size: clamp(24px, 2.3vw, 32px); font-weight: 650; letter-spacing: -0.035em; line-height: 1.05; color: #F2F0EB; }
+.vk-metin > p:not(.vk-ust) { margin: 0; color: #B3B6BC; font-size: 15px; line-height: 1.55; max-width: 560px; }
+.vk-cip { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; padding: 0; list-style: none; }
+.vk-cip li { font-family: var(--mono); font-size: 11.5px; color: #D7D8DB; border: 1px solid rgba(255, 255, 255, .14); border-radius: 4px; padding: 4px 8px; }
+
+@media (max-width: 960px) {
+  .vk, .vk:nth-child(n) { grid-column: 1 / -1; }
+  .vk-sahne { height: clamp(260px, 62vw, 420px); }
+}
+@media (prefers-reduced-motion: reduce) { .vk-sahne img, .vk-ac { transition: none; } }
